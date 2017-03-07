@@ -3,11 +3,14 @@ html
     head
         title="Bot Market"
         script(src="vue.min.js")
+        script(src="axios.min.js")
        
     body
         h1 Bot Market
 
         section 
             h2 Bots
-            #bots {{ message }}
+            #bots.
+             {{ message }}
+             {{ botList }}
         script(src="bots.js")

@@ -3,8 +3,11 @@ const app = koa();
 const router = require('koa-router');
 const static = require('koa-static');
 const compress = require('koa-compress');
+const cors = require('koa-cors');
+const koaBody = require('koa-body');
+
 var pjson = require('./package.json');
-const addBot = require("./controller/addBot");
+const botList = require("./controller/botList");
 const Pug = require('koa-pug');
 const pug = new Pug({
   viewPath: './views',
@@ -14,15 +17,28 @@ const pug = new Pug({
 
 const _ = router(); //Instantiate the router
 
+app.use(cors());
+app.use(koaBody());
 app.use(_.routes()); //Use the routes defined using the router
 
-_.get('/', showIndex); // Define routes
-_.post('/bot', addBot.add);
-_.get('/bot', addBot.show);
+// index//
+_.get('/', function *showIndex(){
+    this.render('index',{bots:botList.show()});
+});
 
-function *showIndex(){
-    this.render('index');
-};
+// neuen Bot anlegen
+_.post('/bot', function* () {
+    console.log("body",this.request.body)
+    botList.add(this.request.body);
+
+});
+
+// Liste von Bots zeigen
+_.get('/bot', function *showBots() {
+    this.body = botList.show();
+});
+
+
 
 
 app.use(static('public'));
