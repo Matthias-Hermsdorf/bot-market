@@ -2,10 +2,12 @@ doctype html
 html
     head
         title="Bot Market"
-        script(src="vue.min.js")
         script(src="axios.min.js")
-       
+        script(src="vue.min.js")
     body
+
+        script(src="socket.io.min.js")
+        script(src="socket.js")
         h1 Bot Market
 
         section 
@@ -14,3 +16,5 @@ html
              {{ message }}
              {{ botList }}
         script(src="bots.js")
+
+

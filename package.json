@@ -1,5 +1,5 @@
 {
-  "name": "robot-market",
+  "name": "bot-market",
   "version": "0.1.0",
   "description": "",
   "main": "app.js",
@@ -9,18 +9,18 @@
   "author": "Matthias Hermsdorf",
   "license": "ISC",
   "devDependencies": {
-    "koa": "^1.2.4",
     "koa-body": "^1.6.0",
     "koa-compress": "^1.0.9",
     "koa-cors": "0.0.16",
     "koa-router": "^5.4.0",
-    "koa-static": "^2.0.0"
+    "koa-static": "^2.0.0",
+    "koa-pug": "^3.0.0-2",
+    "koa.io": "0.0.3",
+    "pug": "^2.0.0-beta11"
   },
   "port": "3095",
   "dependencies": {
     "axios": "^0.15.3",
-    "koa-pug": "^3.0.0-2",
-    "pug": "^2.0.0-beta11",
     "vue": "^2.2.1"
   }
 }
