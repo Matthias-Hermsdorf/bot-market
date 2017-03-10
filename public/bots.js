@@ -6,9 +6,3 @@ var bots = new Vue({
     botList: []
   }
 });
-
-axios.get("/bot").then(function (response) {
-
-  console.log("axios get /bot", response.data);
-  bots.botList=response.data;
-});

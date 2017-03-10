@@ -1,7 +1,6 @@
 //const koa = require('koa');
 const koa = require('koa.io');
 
-
 const router = require('koa-router');
 const koaStatic = require('koa-static');
 const compress = require('koa-compress');
@@ -9,7 +8,7 @@ const cors = require('koa-cors');
 const koaBody = require('koa-body');
 const app = koa();
 
-var pjson = require('./package.json');
+const pjson = require('./package.json');
 const botList = require("./controller/botList");
 const Pug = require('koa-pug');
 const pug = new Pug({
@@ -50,16 +49,19 @@ app.io.use(function* (next) {
     // on connect
     console.log("connect socket");
     //console.log("connect socket this.broadcast.emit", this.broadcast.emit);
-
-    this.broadcast.emit('bot-list', botList.show());
+    this.emit("mssage",{msg:"neu client connected"})
+    this.emit('bot-list', botList.show());
     yield* next;
     console.log("close socket");
     // on disconnect
 });
 
 
-app.io.route('add-bot', function* () {
+app.io.route('bot-add', function* () {
+    //console.log("socket add",this.data[0]); 
+    console.log("socket add"); 
     botList.add(this.data[0])
+    this.emit('bot-list', botList.show());
 
 
 });
@@ -67,7 +69,7 @@ app.io.route('add-bot', function* () {
 
 app.listen(pjson.port);
 
-console.log(getTime()+" server running at :"+pjson.port);
+console.log(getTime()+" bot-market is running at :"+pjson.port);
 
 function getTime () {
     const date = new Date();

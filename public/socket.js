@@ -19,9 +19,11 @@ socket.on('bot-add', function () {
     //$(window).trigger({type:"connection-found"})
     console.log("socket bot-add");
 });
+
 socket.on('bot-list', function (e) {
     //$(window).trigger({type:"connection-found"})
     console.log("socket bot-list",e);
+    bots.botList=e;
 });
 
 /*
