@@ -15,15 +15,15 @@ socket.on('disconnect close', function () {
    // $(window).trigger({type: "connection-lost"})
 });
 
-socket.on('bot-add', function () {
+socket.on('device-add', function () {
     //$(window).trigger({type:"connection-found"})
-    console.log("socket bot-add");
+    console.log("socket device-add");
 });
 
-socket.on('bot-list', function (e) {
+socket.on('device-list', function (e) {
     //$(window).trigger({type:"connection-found"})
-    console.log("socket bot-list",e);
-    bots.botList=e;
+    console.log("socket device-list",e);
+    devices.deviceList=e;
 });
 
 /*

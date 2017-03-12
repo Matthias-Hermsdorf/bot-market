@@ -9,7 +9,7 @@ const koaBody = require('koa-body');
 const app = koa();
 
 const pjson = require('./package.json');
-const botList = require("./controller/botList");
+const deviceList = require("./controller/deviceList");
 const Pug = require('koa-pug');
 const pug = new Pug({
   viewPath: './views',
@@ -28,21 +28,10 @@ app.use(_.routes()); //Use the routes defined using the router
 
 // index//
 _.get('/', function *showIndex(){
-    this.render('index',{bots:botList.show()});
+    this.render('index');
 });
 
 // neuen Bot anlegen
-_.post('/bot', function* () {
-    console.log("body",this.request.body)
-    botList.add(this.request.body);
-    app.io.broadcast.emit("bot-add",this.request.body)
-
-});
-
-// Liste von Bots zeigen
-_.get('/bot', function *showBots() {
-    this.body = botList.show();
-});
 
 // middleware for socket.io's connect and disconnect
 app.io.use(function* (next) {
@@ -50,18 +39,18 @@ app.io.use(function* (next) {
     console.log("connect socket");
     //console.log("connect socket this.broadcast.emit", this.broadcast.emit);
     this.emit("mssage",{msg:"neu client connected"})
-    this.emit('bot-list', botList.show());
+    this.emit('device-list', deviceList.show());
     yield* next;
     console.log("close socket");
     // on disconnect
 });
 
 
-app.io.route('bot-add', function* () {
+app.io.route('device-add', function* () {
     //console.log("socket add",this.data[0]); 
     console.log("socket add"); 
-    botList.add(this.data[0])
-    this.emit('bot-list', botList.show());
+    deviceList.add(this.data[0])
+    this.emit('device-list', deviceList.show());
 
 
 });
