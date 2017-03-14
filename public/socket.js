@@ -1,7 +1,7 @@
 let socket = io(location.host);
 
-/*
-$(document).on("visibilitychange", function () {
+
+document.addEventListener("visibilitychange", function() {
     console.log("visibilitychange", document.hidden);
     if (document.visibilityState != "visible") {
         socket.close();
@@ -9,7 +9,7 @@ $(document).on("visibilitychange", function () {
         socket = io(location.host);
     }
 });
-*/
+
 socket.on('disconnect close', function () {
     console.log("disconnect");
    // $(window).trigger({type: "connection-lost"})

@@ -51,8 +51,6 @@ app.io.route('device-add', function* () {
     console.log("socket add"); 
     deviceList.add(this.data[0])
     this.emit('device-list', deviceList.show());
-
-
 });
 
 

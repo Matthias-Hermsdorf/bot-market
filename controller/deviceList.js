@@ -1,4 +1,4 @@
-let devices = [{name:"r2d2",host:"localhost:4000"}];
+let devices = [{name:"r2d2",host:"localhost:4000", type:"car"}];
 
 function add (device) {
     console.log("add device",device)

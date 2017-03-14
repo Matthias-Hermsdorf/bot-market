@@ -11,9 +11,18 @@ html
 
         section 
             h2 Devices
-            #devices.
-             {{ message }}
-             {{ deviceList }}
+            #devices
+                ul
+                    device-link(v-for="device in deviceList" v-bind:device="device")
+
         script(src="devices.js")
 
-
+        section
+            h2 Doku
+            p.
+                Der Server lauscht auf socket.io Verbindungen. Neue Geräte müssen nach der Verbindung mit einer device-add Message registrieren
+            code market.emit("device-add",{name:"Remote Backend",host:"example.org:4001", type:"remote"})
+            p.
+                Die Typen sind bisher remote, head und car. Die verschiedenen Typen können zu einem gemeinsamen Bot verbunden werden, müssen aber nicht auf dem gleichen Gerät ausgeführt werden.
+                
+                
