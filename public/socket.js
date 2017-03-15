@@ -2,8 +2,8 @@ let socket = io(location.host);
 
 
 document.addEventListener("visibilitychange", function() {
-    console.log("visibilitychange", document.hidden);
-    if (document.visibilityState != "visible") {
+    console.log("visibilitychange hidden:", document.hidden);
+    if (document.hidden) {
         socket.close();
     } else {
         socket = io(location.host);
@@ -22,7 +22,7 @@ socket.on('device-add', function () {
 
 socket.on('device-list', function (e) {
     //$(window).trigger({type:"connection-found"})
-    console.log("socket device-list",e);
+    console.log("socket device-list",e,"host", e[0].host);
     devices.deviceList=e;
 });
 

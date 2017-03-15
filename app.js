@@ -36,19 +36,20 @@ _.get('/', function *showIndex(){
 // middleware for socket.io's connect and disconnect
 app.io.use(function* (next) {
     // on connect
-    console.log("connect socket");
-    //console.log("connect socket this.broadcast.emit", this.broadcast.emit);
-    this.emit("mssage",{msg:"neu client connected"})
+    console.log("connect socket",this.id);
     this.emit('device-list', deviceList.show());
     yield* next;
+    this.emit('device-list', deviceList.show());
     console.log("close socket");
     // on disconnect
+    deviceList.remove({socketId:this.id})
 });
 
 
 app.io.route('device-add', function* () {
     //console.log("socket add",this.data[0]); 
-    console.log("socket add"); 
+    console.log("socket add", this.id); 
+    this.data[0].socketId = this.id;
     deviceList.add(this.data[0])
     this.emit('device-list', deviceList.show());
 });
