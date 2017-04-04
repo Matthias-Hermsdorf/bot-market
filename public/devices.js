@@ -3,7 +3,7 @@ Vue.component('device-link', {
   // "prop", which is like a custom attribute.
   // This prop is called todo.
   props: ['device'],
-  template: '<li><a target="_blank" v-bind:href="device.host">{{ device.name }} ({{ device.type }})</a> active:{{ device.active }}</li>'
+  template: '<li><a target="_blank" v-bind:href="device.host">{{ device.name }} ({{ device.type }}, {{device.host}})</a> active:{{ device.active }}</li>'
 })
 
 var devices = new Vue({
